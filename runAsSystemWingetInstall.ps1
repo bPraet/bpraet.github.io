@@ -14,4 +14,5 @@ Invoke-Command -ComputerName $laptop -ScriptBlock {
 
     Register-ScheduledTask -TaskName "execNow" -User "System" -Action $task -Settings $settings
     Start-ScheduledTask -TaskName "execNow"
+
 }
