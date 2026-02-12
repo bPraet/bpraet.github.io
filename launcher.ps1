@@ -9,9 +9,9 @@ Import-Module PwshSpectreConsole
 Clear-Host
 
 $scripts = [ordered]@{
-    "Test script" = "test"
     "Install app from Winget as System" = "runAsSystemWingetInstall"
     "Script 3" = ""
+    "Test script" = "test"
     "Leave" = "Leave"
 }
 
