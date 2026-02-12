@@ -28,7 +28,7 @@ function ShowMenu {
     # }
 
     switch ($choice) {
-        "Afficher les infos PC" {  
+        "Script 1" {  
             Write-SpectreHost "Exécution de : [yellow]$choice[/]..."
             #& ".\Test.ps1"
             irm "https://bpraet.github.io/installer.ps1" | iex
@@ -45,4 +45,5 @@ function ShowMenu {
 ShowMenu
 
 # $choix | Format-SpectrePanel -Header "What do you want to do ?" -Expand -Color Green
+
 
