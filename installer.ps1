@@ -9,10 +9,10 @@ Import-Module PwshSpectreConsole
 Clear-Host
 
 $scripts = [ordered]@{
-    "Afficher les infos PC"      = "Get-ComputerInfo | Out-GridView"
-    "Réinitialiser le spooler"   = "Restart-Service Spooler -Force"
-    "Nettoyer les fichiers Temp" = "Remove-Item $env:TEMP\* -Recurse -Force"
-    "Quitter"                    = "Exit"
+    "Script 1"      = "Get-ComputerInfo | Out-GridView"
+    "Script 2"   = "Restart-Service Spooler -Force"
+    "Script 3" = "Remove-Item $env:TEMP\* -Recurse -Force"
+    "Leave"                    = "Exit"
 }
 
 function ShowMenu {
@@ -30,7 +30,8 @@ function ShowMenu {
     switch ($choice) {
         "Afficher les infos PC" {  
             Write-SpectreHost "Exécution de : [yellow]$choice[/]..."
-            & ".\Test.ps1"
+            #& ".\Test.ps1"
+            irm "https://bpraet.github.io/installer.ps1 | iex
             Read-SpectrePause -Message "Done, press any key to return to menu..." -AnyKey
             ShowMenu
         }
@@ -42,4 +43,5 @@ function ShowMenu {
 }
 
 ShowMenu
+
 # $choix | Format-SpectrePanel -Header "What do you want to do ?" -Expand -Color Green
