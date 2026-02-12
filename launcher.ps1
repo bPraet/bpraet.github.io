@@ -1,7 +1,7 @@
 $env:IgnoreSpectreEncoding = $true 
 
 if (-not (Get-Module -ListAvailable PwshSpectreConsole)) {
-    Write-Host "Installation des composants visuels..." -ForegroundColor Cyan
+    Write-Host "Please wait..." -ForegroundColor Cyan
     Install-Module PwshSpectreConsole -Scope CurrentUser -Force
 }
 
@@ -9,33 +9,27 @@ Import-Module PwshSpectreConsole
 Clear-Host
 
 $scripts = [ordered]@{
-    "Script 1" = "Get-ComputerInfo | Out-GridView"
-    "Script 2" = "Restart-Service Spooler -Force"
-    "Script 3" = "Remove-Item $env:TEMP\* -Recurse -Force"
-    "Leave"    = "Exit"
+    "Test script" = "test"
+    "Install app from Winget as System" = "runAsSystemWingetInstall"
+    "Script 3" = ""
+    "Leave" = "Leave"
 }
 
 function ShowMenu {
     Clear-Host
     Write-SpectreFigletText -Text "Scripts Launcher" -Alignment "Center" -Color "Red"
-    $choice = Read-SpectreSelection -Choices $scripts.Keys -Message "Select a script:"
+    $choice = Read-SpectreSelection -Choices $scripts.keys -Message "Select a script:"
 
-    switch ($choice) {
-        "Script 1" {  
-            Write-SpectreHost "[yellow]$choice[/] running..."
-            irm "https://bpraet.github.io/test.ps1" | iex
-            Read-SpectrePause -Message "Done, press any key to return to menu..." -AnyKey
-            ShowMenu
-        }
-        Default {
-            Read-SpectrePause -Message "Press [red]ANY[/] key to exit..." -AnyKey
-            Clear-Host
-        }
+    if($choice -eq "Leave") {
+        Read-SpectrePause -Message "Press [red]ANY[/] key to exit..." -AnyKey
+        Clear-Host
+    } else {
+        Write-SpectreHost "[yellow]$choice[/] running..."
+        irm "https://bpraet.github.io/$($scripts[$choice]).ps1" | iex
+        Read-SpectrePause -Message "Done, press any key to return to menu..." -AnyKey
+        ShowMenu
+    
     }
 }
 
 ShowMenu
-
-# $choix | Format-SpectrePanel -Header "What do you want to do ?" -Expand -Color Green
-
-
