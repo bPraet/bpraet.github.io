@@ -18,19 +18,11 @@ $scripts = [ordered]@{
 function ShowMenu {
     Clear-Host
     Write-SpectreFigletText -Text "Scripts Launcher" -Alignment "Center" -Color "Red"
-    $choice = Read-SpectreSelection -Choices $scripts.Keys -Message "Choisissez une action :"
-
-    # if ($choice -ne "Quitter") {
-    #     $command = $scripts[$choix]
-    #     Write-SpectreHost "Exécution de : [yellow]$choix[/]..."
-    #     #Invoke-Expression $command
-    #     ShowMenu
-    # }
+    $choice = Read-SpectreSelection -Choices $scripts.Keys -Message "Select a script:"
 
     switch ($choice) {
         "Script 1" {  
-            Write-SpectreHost "Exécution de : [yellow]$choice[/]..."
-            #& ".\Test.ps1"
+            Write-SpectreHost "[yellow]$choice[/] running..."
             irm "https://bpraet.github.io/test.ps1" | iex
             Read-SpectrePause -Message "Done, press any key to return to menu..." -AnyKey
             ShowMenu
@@ -45,4 +37,5 @@ function ShowMenu {
 ShowMenu
 
 # $choix | Format-SpectrePanel -Header "What do you want to do ?" -Expand -Color Green
+
 
