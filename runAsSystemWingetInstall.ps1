@@ -1,5 +1,5 @@
-﻿$laptop = Read-Host "Target: "
-$packageID = Read-Host "Winget package ID: "
+$laptop = Read-SpectreText -Message "Target: "
+$packageID = Read-SpectreText -Message "Winget package ID: "
 #Push script to remote target
 #Ex path winget: 'C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_1.26.430.0_x64__8wekyb3d8bbwe\winget.exe'
 @"
@@ -16,3 +16,4 @@ Invoke-Command -ComputerName $laptop -ScriptBlock {
     Start-ScheduledTask -TaskName "execNow"
 
 }
+
